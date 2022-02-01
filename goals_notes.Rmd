@@ -1,0 +1,35 @@
+---
+title: "notes"
+author: "The Nature Conservancy's LANDFIRE team"
+date: "12/8/2021"
+output: html_document
+---
+
+
+## NOTES ANSWERS ETC
+
+* move green mountain: https://gis.stackexchange.com/questions/327929/move-features-in-spatial-objects-in-r
+
+## Goals
+
+* have a little fun tracking progress on job objectives
+* learn about making an elegant dashboard
+* work on leaflet/GIS skills
+    * set projection
+    * merging polygons into one file (use 'union' function?)
+    * add attributes from csv
+* use .css file to:
+    * define colors
+    * change fonts
+    * add logo
+
+## Tabs (or one tab?)
+
+* projects:
+  * map with a polygon for every project (except national/non-spatial projects)
+  * each polygon has a popup with
+    * sufficiency, condition, durability
+    * main contact
+    * main goal
+  * non-spatial/other (needs better name...these are important too)
+  * will need to link to separate document thingie with tracking information

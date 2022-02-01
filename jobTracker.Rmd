@@ -1,0 +1,105 @@
+---
+title: "Job Tracker for Randy Swaty"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: scroll
+    theme: yeti
+    
+self_contained: true
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(rgdal)
+library(raster)
+library(htmlwidgets)
+library(leaflet)
+library(tidyverse)
+library(sf)
+```
+
+
+
+Place-based Projects
+========================================================
+
+##  Need something here
+
+<font size="6"> Map of spatially relevant projects. </font>
+
+
+```{r read projects, message=FALSE, warning=FALSE, include=FALSE}
+projects <- st_read('sData/projects.shp')
+
+# add in components
+components <- read_csv("components.csv")
+#View(components)
+
+projects <- merge(projects, components, by = 'name')
+```
+
+```{r project map, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, hide = TRUE}
+
+
+# Make popup
+popup <- paste("Project Name", projects$name, "<br>",
+              "Sufficiency:", projects$sufficiency, "<br>",
+              "Durability:", projects$durability, "<br>",
+              "Condition:", projects$condition)
+
+
+# da map
+projectsMap <-
+  leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  setView(-98.483330, 38.712046, zoom = 4) %>%  
+  addPolygons(data = projects, 
+              fill = TRUE, 
+              fillOpacity = 0.7,
+              fillColor = '#B1DAB3',
+              stroke = TRUE, 
+              weight = 0.5,
+              color = "#526653",
+              popup = ~popup)
+
+projectsMap
+```
+  
+<br>
+
+**In the pop-up you will see:**
+
+* Name-brief name of project
+* Sufficiency (0-4, low to high): High means that I feel that I have the time, data, support, knowledge and/or guidance to be successful. 
+* Durability (0-4, low to high): High means there is that the project leads to lasting conservation, education and/or partnerships.
+* Condition (0-4, low to high): High means the project is progressing according to schedule, partnerships are in good shape (regarding quality and quantity of communication and trust) and/or the deliverables are being generated as expected. 
+
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+<b><font  size="4em" color="#000000">This map...</font></b>  
+
+This map represents "spatially-relevant" projects I participate in, starting December, 2021.  I will be adding project boundaries as I meet people, or take on major work (i.e., I am not looking backwards to projects I have completed, or forward to possible projects).  There will be many additions over the next few months.
+
+Also see "Non-spatial projects" tab for projects that are national, may not have a definite geography or are people-focused.  
+
+
+
+
+
+Non-spatial projects
+========================================================
+
+## need something here for this to work
+
+Just a clickable list.  Click to get more complete description.  Condisder a chart?
+
+* FSC and LANDFIRE
+* CDL
+* etc.
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+<b><font  size="4em" color="#000000">What this page is for.</font></b>  
+
+Some projects span the country (and possibly more), or are not really tied to a geography.
